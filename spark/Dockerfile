@@ -76,6 +76,8 @@ RUN curl -s https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10
 # Download Kafka clients JAR
 RUN curl -s https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.8.1/kafka-clients-2.8.1.jar -Lo /opt/spark/jars/kafka-clients-2.8.1.jar
 
+RUN apt-get update && apt-get install -y netcat
+
 
 # Download Spark Streaming Kafka JAR
 RUN curl -s https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.5.2/spark-streaming-kafka-0-10_2.12-3.5.2.jar -Lo /opt/spark/jars/spark-streaming-kafka-0-10_2.12-3.5.2.jar
