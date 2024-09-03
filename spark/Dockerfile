@@ -70,6 +70,28 @@ RUN curl -s https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-gcp-bundle
 # Download Azure bundle
 RUN curl -s https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-azure-bundle/${ICEBERG_VERSION}/iceberg-azure-bundle-${ICEBERG_VERSION}.jar -Lo /opt/spark/jars/iceberg-azure-bundle-${ICEBERG_VERSION}.jar
 
+
+RUN curl -s https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.2/spark-sql-kafka-0-10_2.12-3.5.2.jar -Lo /opt/spark/jars/spark-sql-kafka-0-10_2.12-3.5.2.jar 
+
+# Download Kafka clients JAR
+RUN curl -s https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.8.1/kafka-clients-2.8.1.jar -Lo /opt/spark/jars/kafka-clients-2.8.1.jar
+
+
+# Download Spark Streaming Kafka JAR
+RUN curl -s https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.5.2/spark-streaming-kafka-0-10_2.12-3.5.2.jar -Lo /opt/spark/jars/spark-streaming-kafka-0-10_2.12-3.5.2.jar
+
+ENV COMMONS_POOL_VERSION=2.11.1
+ENV KAFKA_CLIENTS_VERSION=3.4.1
+
+# Download the required JARs
+RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/${COMMONS_POOL_VERSION}/commons-pool2-${COMMONS_POOL_VERSION}.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/${KAFKA_CLIENTS_VERSION}/kafka-clients-${KAFKA_CLIENTS_VERSION}.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/${SPARK_VERSION}/spark-sql-kafka-0-10_2.12-${SPARK_VERSION}.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/${SPARK_VERSION}/spark-token-provider-kafka-0-10_2.12-${SPARK_VERSION}.jar -P /opt/spark/jars/
+
+
+
+
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
  && unzip awscliv2.zip \
