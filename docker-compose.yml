@@ -36,7 +36,7 @@ services:
       - AWS_REGION=us-east-1
     ports:
       - 8888:8888
-      - 8080:8080
+      - 8081:8080
       - 10000:10000
       - 10001:10001
   rest:
@@ -66,7 +66,7 @@ services:
           - warehouse.minio
     ports:
       - 9001:9001
-      - 9000:9000
+      - 9002:9000
     command: ["server", "/data", "--console-address", ":9001"]
   mc:
     depends_on:
